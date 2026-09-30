@@ -12,7 +12,7 @@ async function getDatabase() {
     driver: sqlite3.Database
   });
 
-  await dbInstance.exec();
+  await dbInstance.exec('CREATE TABLE IF NOT EXISTS products (id INTEGER PRIMARY KEY AUTOINCREMENT, sku TEXT UNIQUE NOT NULL, name TEXT NOT NULL, stock INTEGER NOT NULL DEFAULT 0, price REAL NOT NULL);');
 
   // Insert initial seed data
   const count = await dbInstance.get('SELECT COUNT(*) as count FROM products');
